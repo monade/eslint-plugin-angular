@@ -1,0 +1,17 @@
+{
+	"name": "@monade/eslint-plugin-angular",
+	"version": "1.0.0",
+	"description": "A couple of rules for eslint + angular",
+	"main": "src/index.js",
+	"scripts": {
+		"test": "mocha"
+	},
+	"author": "Mònade",
+	"license": "MIT",
+	"devDependencies": {
+		"@typescript-eslint/parser": "^5.35.1",
+		"eslint": "^8.22.0",
+		"mocha": "^10.0.0",
+		"typescript": "^4.7.4"
+	}
+}
