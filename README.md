@@ -1,3 +1,6 @@
+![Tests](https://github.com/monade/eslint-plugin-angular/actions/workflows/test.yml/badge.svg)
+[![npm version](https://badge.fury.io/js/@monade%2Feslint-plugin-angular.svg)](https://badge.fury.io/js/@monade%2Feslint-plugin-angular)
+
 # @monade/eslint-plugin-angular
 A couple of quality-of-life eslint rules for Angular components.
 
@@ -30,10 +33,13 @@ Add to your .eslint.js:
 
 ## TODO:
 * Document rules
-* When strategy is OnPush, show an error if there's a non-scalar property that is not ReadOnly<>
+* [Rule] When strategy is OnPush, show an error if there's a non-scalar property that is not ReadOnly<>
+* [Rule] Component too long
+* [Rule] Suggest strategy OnPush when the component is in the "components" folder
+* [Rule] ADVANCED: Check if there's a reactivity bug with changeDetection: OnPush
 
-## Debugging
-You can use an AST view tool
+## Contributing
+You can use an AST view tool to debug the structure of some code parts:
 * For Javascript: https://astexplorer.net/
 * For Typescript: https://ts-ast-viewer.com/
 

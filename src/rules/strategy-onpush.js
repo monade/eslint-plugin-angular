@@ -29,6 +29,7 @@ module.exports = {
           return;
         }
 
+        /** @type {import('estree').MethodDefinition} */
         const constructor = node.body.body.find(
           (e) => e.kind === "constructor"
         );
