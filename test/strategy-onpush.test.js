@@ -28,6 +28,52 @@ ruleTester.run("strategy-onpush", strategyOnPush, {
         }
       `,
     },
+    {
+      name: "Injected dependency, no strategy onpush",
+      code: `
+        @Component({
+          selector: 'app-root',
+        })
+        public class AppComponent {
+          someService = inject(Service);
+        }
+      `,
+    },
+    {
+      name: "Input, no property",
+      code: `
+        @Component({
+          selector: 'app-root',
+          changeDetection: ChangeDetectionStrategy.OnPush,
+        })
+        public class AppComponent {
+          @Input() someInput: string;
+        }
+      `,
+    },
+    {
+      name: "Input signal, no property",
+      code: `
+        @Component({
+          selector: 'app-root',
+          changeDetection: ChangeDetectionStrategy.OnPush,
+        })
+        public class AppComponent {
+          someInput = input("some");
+        }
+      `,
+    },
+    {
+      name: "property that is not an input nor an output",
+      code: `
+        @Component({
+          selector: 'app-root',
+        })
+        public class AppComponent {
+          someInput = signal();
+        }
+      `,
+    }
   ],
   invalid: [
     {
@@ -57,5 +103,41 @@ public class AppComponent {}`,
         },
       ],
     },
+    {
+      name: "property that is not an input nor an output",
+      code: `
+        @Component({
+          selector: 'app-root',
+        })
+        public class AppComponent {
+          someInput = input('');
+        }`,
+      output: `
+        @Component({
+          selector: 'app-root',
+changeDetection: ChangeDetectionStrategy.OnPush,
+        })
+        public class AppComponent {
+          someInput = input('');
+        }`,
+      errors: [
+        {
+          messageId: "strategyOnPush",
+          suggestions: [
+            {
+              messageId: 'strategyOnPushSuggestion',
+              output: `
+        @Component({
+          selector: 'app-root',
+changeDetection: ChangeDetectionStrategy.OnPush,
+        })
+        public class AppComponent {
+          someInput = input('');
+        }`,
+            },
+          ],
+        },
+      ],
+    }
   ],
 });

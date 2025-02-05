@@ -1,4 +1,4 @@
-const { getDecoratorName } = require('../utils');
+const { getDecoratorName, isAngularSignal, hasDecorator } = require('../utils');
 
 /** @type {import('eslint').Rule.RuleModule} */
 module.exports = {
@@ -38,6 +38,33 @@ module.exports = {
           if (!params || params.filter((e) => e.accessibility).length > 0) {
             return;
           }
+        }
+
+        const hasInject = node.body.body.find((e) => {
+          return e.type === "PropertyDefinition" && isAngularSignal(e, "inject");
+        });
+
+        if (hasInject) {
+          return;
+        }
+
+        const hasIOProperty = node.body.body.find((e) => {
+          if (e.type !== "PropertyDefinition") {
+            return false;
+          }
+          if (isAngularSignal(e, "input") ||
+              isAngularSignal(e, "output") ||
+              hasDecorator(e, "Input") ||
+              hasDecorator(e, "Output")
+            ) {
+            return false;
+          }
+
+          return true;
+        });
+
+        if (hasIOProperty) {
+          return;
         }
 
         const decoratorParams =

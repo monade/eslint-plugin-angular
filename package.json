@@ -1,6 +1,6 @@
 {
   "name": "@monade/eslint-plugin-angular",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A couple of quality-of-life rules for eslint + angular",
   "main": "src/index.js",
   "scripts": {
